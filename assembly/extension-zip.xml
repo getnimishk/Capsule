@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  assembly/extension-zip.xml
+  Maven Assembly Descriptor — packages the Capsule Chrome extension
+  into a distributable .zip file suitable for:
+    - Uploading to the Chrome Web Store
+    - Loading unpacked in chrome://extensions/
+    - CI/CD artifact storage
+-->
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.2.0
+                              https://maven.apache.org/xsd/assembly-2.2.0.xsd">
+
+  <id>extension</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+
+  <!-- Don't wrap in an extra top-level directory inside the zip -->
+  <includeBaseDirectory>false</includeBaseDirectory>
+
+  <fileSets>
+
+    <!-- Core extension files -->
+    <fileSet>
+      <directory>${project.basedir}/src/main/resources/extension</directory>
+      <outputDirectory>/</outputDirectory>
+      <includes>
+        <include>manifest.json</include>
+        <include>background.js</include>
+        <include>content.js</include>
+      </includes>
+    </fileSet>
+
+    <!-- Injectors (per-platform content scripts) -->
+    <fileSet>
+      <directory>${project.basedir}/src/main/resources/extension/injectors</directory>
+      <outputDirectory>/injectors</outputDirectory>
+      <includes>
+        <include>*.js</include>
+      </includes>
+    </fileSet>
+
+    <!-- Shared utilities -->
+    <fileSet>
+      <directory>${project.basedir}/src/main/resources/extension/shared</directory>
+      <outputDirectory>/shared</outputDirectory>
+      <includes>
+        <include>*.js</include>
+      </includes>
+    </fileSet>
+
+    <!-- Popup UI -->
+    <fileSet>
+      <directory>${project.basedir}/src/main/resources/extension/popup</directory>
+      <outputDirectory>/popup</outputDirectory>
+      <includes>
+        <include>*.html</include>
+        <include>*.js</include>
+        <include>*.css</include>
+      </includes>
+    </fileSet>
+
+    <!-- Options/Settings page -->
+    <fileSet>
+      <directory>${project.basedir}/src/main/resources/extension/options</directory>
+      <outputDirectory>/options</outputDirectory>
+      <includes>
+        <include>*.html</include>
+        <include>*.js</include>
+        <include>*.css</include>
+      </includes>
+    </fileSet>
+
+    <!-- Icons -->
+    <fileSet>
+      <directory>${project.basedir}/src/main/resources/extension/icons</directory>
+      <outputDirectory>/icons</outputDirectory>
+      <includes>
+        <include>*.png</include>
+        <include>*.svg</include>
+      </includes>
+    </fileSet>
+
+    <!-- Assets (screenshots, preview images) -->
+    <fileSet>
+      <directory>${project.basedir}/src/main/resources/extension/assets</directory>
+      <outputDirectory>/assets</outputDirectory>
+      <includes>
+        <include>*.png</include>
+        <include>*.jpg</include>
+        <include>*.webp</include>
+      </includes>
+    </fileSet>
+
+  </fileSets>
+
+</assembly>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- ── Project Identity ─────────────────────────────────────── -->
+  <groupId>io.github.nimishkanungo</groupId>
+  <artifactId>capsule</artifactId>
+  <version>2.0.0</version>
+  <packaging>pom</packaging>
+
+  <name>Capsule</name>
+  <description>
+    Capsule by Nimish Kanungo — Capture and sync AI conversations from Claude,
+    ChatGPT, Gemini, DeepSeek, Perplexity, Grok, Mistral, and Kimi into NotebookLM.
+  </description>
+  <url>https://github.com/nimishkanungo/capsule</url>
+  <inceptionYear>2026</inceptionYear>
+
+  <developers>
+    <developer>
+      <id>nimishkanungo</id>
+      <name>Nimish Kanungo</name>
+      <url>https://github.com/nimishkanungo</url>
+      <roles>
+        <role>owner</role>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:git://github.com/nimishkanungo/capsule.git</connection>
+    <developerConnection>scm:git:ssh://github.com/nimishkanungo/capsule.git</developerConnection>
+    <url>https://github.com/nimishkanungo/capsule</url>
+    <tag>v2.0.0</tag>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/nimishkanungo/capsule/issues</url>
+  </issueManagement>
+
+  <!-- ── Global Properties ─────────────────────────────────────── -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- Extension output directory (built .zip goes here) -->
+    <extension.source.dir>${project.basedir}/src/main/resources/extension</extension.source.dir>
+    <extension.output.dir>${project.build.directory}/capsule-extension</extension.output.dir>
+    <extension.zip.name>capsule-${project.version}</extension.zip.name>
+
+    <!-- Plugin versions (pinned for reproducible builds) -->
+    <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+    <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+    <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
+    <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
+  </properties>
+
+  <!-- ── Build Lifecycle ───────────────────────────────────────── -->
+  <build>
+    <plugins>
+
+      <!-- 1. Copy extension source files into target/capsule-extension/ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${maven-resources-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>copy-extension-sources</id>
+            <phase>process-resources</phase>
+            <goals><goal>copy-resources</goal></goals>
+            <configuration>
+              <outputDirectory>${extension.output.dir}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${extension.source.dir}</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- 2. Validate manifest.json is parseable (ant echo trick) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>${maven-antrun-plugin.version}</version>
+        <executions>
+
+          <!-- validate: confirm manifest.json exists -->
+          <execution>
+            <id>validate-manifest</id>
+            <phase>validate</phase>
+            <goals><goal>run</goal></goals>
+            <configuration>
+              <target>
+                <available file="${extension.source.dir}/manifest.json"
+                           property="manifest.present"/>
+                <fail message="manifest.json not found in extension source!"
+                      unless="manifest.present"/>
+                <echo message="[Capsule] manifest.json found — OK"/>
+              </target>
+            </configuration>
+          </execution>
+
+          <!-- package: print packaging summary -->
+          <execution>
+            <id>package-summary</id>
+            <phase>package</phase>
+            <goals><goal>run</goal></goals>
+            <configuration>
+              <target>
+                <echo message=""/>
+                <echo message="╔══════════════════════════════════════════════╗"/>
+                <echo message="║  Capsule v${project.version} — packaged successfully  ║"/>
+                <echo message="║  Output: target/${extension.zip.name}.zip         ║"/>
+                <echo message="║  Author: Nimish Kanungo                      ║"/>
+                <echo message="╚══════════════════════════════════════════════╝"/>
+              </target>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+
+      <!-- 3. Package extension into a distributable .zip -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>${maven-assembly-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>package-extension-zip</id>
+            <phase>package</phase>
+            <goals><goal>single</goal></goals>
+            <configuration>
+              <finalName>${extension.zip.name}</finalName>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>${project.basedir}/assembly/extension-zip.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <!-- ── Profiles ──────────────────────────────────────────────── -->
+  <profiles>
+
+    <!-- dev: fast iteration — skips zip packaging -->
+    <profile>
+      <id>dev</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>package-extension-zip</id>
+                <phase>none</phase> <!-- disable zip in dev mode -->
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- release: production build with checksum verification -->
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>generate-checksums</id>
+                <phase>verify</phase>
+                <goals><goal>run</goal></goals>
+                <configuration>
+                  <target>
+                    <checksum file="${project.build.directory}/${extension.zip.name}.zip"
+                              algorithm="SHA-256"
+                              fileext=".sha256"/>
+                    <echo message="[Capsule] SHA-256 checksum written to ${extension.zip.name}.zip.sha256"/>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
+
+</project>

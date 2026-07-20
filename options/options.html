@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capsule &mdash; Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="page">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <img src="../icons/icon32.png" width="18" height="18" alt="Capsule" style="vertical-align:middle; display:inline-block;" />
+        <span class="logo-text">Capsule</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#compression" class="nav-item active" data-section="compression">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Compression
+        </a>
+        <a href="#llm-provider" class="nav-item" data-section="llm-provider">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          AI Provider
+        </a>
+        <a href="#selectors" class="nav-item" data-section="selectors">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          DOM Selectors
+        </a>
+        <a href="#storage" class="nav-item" data-section="storage">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          Storage
+        </a>
+        <a href="#about" class="nav-item" data-section="about">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          About
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+
+      <!-- Compression Section -->
+      <section id="compression" class="section active">
+        <div class="section-header">
+          <h2 class="section-title">Compression Settings</h2>
+          <p class="section-desc">Control how saved conversations are compressed before storage.</p>
+        </div>
+
+        <!-- Mode selector -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Compression Mode</h3>
+            <p class="card-desc">Local NLP runs entirely in your browser. Gemini API sends text to Google.</p>
+          </div>
+          <div class="mode-options" id="compression-mode-options">
+            <label class="mode-option" id="mode-local">
+              <input type="radio" name="compression-mode" value="local" checked />
+              <div class="mode-card">
+                <div class="mode-icon">&#x1F9E0;</div>
+                <div>
+                  <div class="mode-name">Local NLP <span class="badge badge-default">Default</span></div>
+                  <div class="mode-desc">TF-IDF extractive summarisation &mdash; zero API calls, 100% private</div>
+                </div>
+              </div>
+            </label>
+            <label class="mode-option" id="mode-gemini">
+              <input type="radio" name="compression-mode" value="gemini" />
+              <div class="mode-card">
+                <div class="mode-icon">&#x2728;</div>
+                <div>
+                  <div class="mode-name">Gemini API <span class="badge badge-yellow">Requires key</span></div>
+                  <div class="mode-desc">Gemini 2.5 Flash &mdash; higher quality, sends text to Google</div>
+                </div>
+              </div>
+            </label>
+            <label class="mode-option" id="mode-off">
+              <input type="radio" name="compression-mode" value="off" />
+              <div class="mode-card">
+                <div class="mode-icon">&#x23FB;</div>
+                <div>
+                  <div class="mode-name">Off</div>
+                  <div class="mode-desc">Raw conversations saved without any compression</div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Local NLP settings -->
+        <div class="card" id="local-nlp-settings">
+          <div class="card-header">
+            <h3 class="card-title">Local NLP &mdash; Retention Ratio</h3>
+            <p class="card-desc">Percentage of sentences to keep per message. Lower = more aggressive compression.</p>
+          </div>
+          <div class="slider-wrap">
+            <input type="range" id="nlp-ratio" min="20" max="80" step="5" value="40" class="slider" />
+            <div class="slider-labels">
+              <span>20% (aggressive)</span>
+              <span id="nlp-ratio-value" class="slider-current">40%</span>
+              <span>80% (light)</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            User messages retain an extra 15% to preserve intent. Code blocks are never compressed.
+          </div>
+        </div>
+
+        <!-- Gemini API key -->
+        <div class="card" id="gemini-api-settings" style="display:none">
+          <div class="card-header">
+            <h3 class="card-title">Gemini API Key</h3>
+            <p class="card-desc">Get a free key at <a href="https://aistudio.google.com/app/apikey" target="_blank" class="link">aistudio.google.com</a></p>
+          </div>
+          <div class="input-group">
+            <input type="password" id="gemini-api-key" class="text-input" placeholder="AIzaSy&hellip;" autocomplete="off" spellcheck="false" />
+            <button id="toggle-key-visibility" class="btn btn-ghost btn-sm" type="button">Show</button>
+          </div>
+          <div id="key-status" class="key-status"></div>
+        </div>
+
+        <div class="action-row">
+          <button id="save-compression" class="btn btn-primary">Save compression settings</button>
+          <div id="compression-toast" class="inline-toast"></div>
+        </div>
+      </section>
+
+      <!-- DOM Selectors Section -->
+      <section id="selectors" class="section">
+        <div class="section-header">
+          <h2 class="section-title">DOM Selector Overrides</h2>
+          <p class="section-desc">AI sites often update their DOM. Override selectors here without editing code. Leave blank to use the built-in default.</p>
+        </div>
+
+        <div class="selector-platforms" id="selector-platforms">
+          <!-- Dynamically populated by options.js -->
+        </div>
+
+        <div class="action-row">
+          <button id="save-selectors" class="btn btn-primary">Save selector overrides</button>
+          <button id="reset-selectors" class="btn btn-ghost">Reset all to defaults</button>
+          <div id="selectors-toast" class="inline-toast"></div>
+        </div>
+      </section>
+
+      <!-- AI Provider Section -->
+      <section id="llm-provider" class="section">
+        <div class="section-header">
+          <h2 class="section-title">AI Provider</h2>
+          <p class="section-desc">Configure any LLM to power smart compression, AI-generated handoff prompts, and Ask My Capsule Q&amp;A.</p>
+        </div>
+
+        <!-- Provider picker -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Provider &amp; Model</h3>
+            <p class="card-desc">Select your LLM provider. API keys are stored locally and never leave your browser.</p>
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="llm-provider-select">Provider</label>
+            <select id="llm-provider-select" class="select-input">
+              <option value="">&mdash; None (use local NLP only) &mdash;</option>
+              <option value="openai">OpenAI (GPT-4o, GPT-4.1&hellip;)</option>
+              <option value="anthropic">Anthropic (Claude 3.5 Sonnet&hellip;)</option>
+              <option value="gemini">Google Gemini (2.5 Flash, Pro&hellip;)</option>
+              <option value="groq">Groq (Llama 3.3, Mixtral &mdash; ultra-fast)</option>
+              <option value="openrouter">OpenRouter (200+ models, one key)</option>
+              <option value="ollama">Ollama (Local, no key needed &#x1F512;)</option>
+              <option value="custom">Custom URL (any OpenAI-compat endpoint)</option>
+            </select>
+          </div>
+          <div class="field-row" id="llm-model-row">
+            <label class="field-label" for="llm-model-select">Model</label>
+            <select id="llm-model-select" class="select-input"></select>
+          </div>
+          <div class="field-row" id="llm-custom-url-row" style="display:none">
+            <label class="field-label" for="llm-custom-url">Endpoint URL</label>
+            <input type="url" id="llm-custom-url" class="text-input" placeholder="http://localhost:8080/v1/chat/completions" />
+          </div>
+          <div class="field-row" id="llm-key-row">
+            <label class="field-label" for="llm-api-key">API Key</label>
+            <div class="input-group">
+              <input type="password" id="llm-api-key" class="text-input" placeholder="Paste your API key here"
+                     autocomplete="off" spellcheck="false" />
+              <button id="llm-toggle-key" class="btn btn-ghost btn-sm" type="button">Show</button>
+            </div>
+            <p class="field-hint" id="llm-key-hint"></p>
+          </div>
+          <div class="info-row" id="llm-no-key-note" style="display:none">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Ollama runs locally at <code>localhost:11434</code> &mdash; no API key needed. Install from <a href="https://ollama.com" target="_blank" class="link">ollama.com</a>.
+          </div>
+        </div>
+
+        <!-- Feature toggles -->
+        <div class="card" id="llm-features-card" style="display:none">
+          <div class="card-header">
+            <h3 class="card-title">Enable LLM For</h3>
+            <p class="card-desc">Choose which Capsule features use this LLM. Unselected features fall back to local NLP.</p>
+          </div>
+          <div class="toggle-list">
+            <label class="toggle-item">
+              <input type="checkbox" id="llm-feat-compression" checked />
+              <div>
+                <div class="toggle-label">Smart Compression</div>
+                <div class="toggle-desc">Use LLM to compress conversations instead of local TF-IDF</div>
+              </div>
+            </label>
+            <label class="toggle-item">
+              <input type="checkbox" id="llm-feat-handoff" checked />
+              <div>
+                <div class="toggle-label">AI Handoff Prompts</div>
+                <div class="toggle-desc">Generate smarter, context-aware handoff prompts with the LLM</div>
+              </div>
+            </label>
+            <label class="toggle-item">
+              <input type="checkbox" id="llm-feat-ask" checked />
+              <div>
+                <div class="toggle-label">Ask My Capsule</div>
+                <div class="toggle-desc">Chat with your saved conversations &mdash; ask questions, get answers</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Security note -->
+        <div class="card warning-card" id="llm-security-card" style="display:none">
+          <div class="card-header">
+            <h3 class="card-title">&#9888; Security Note</h3>
+          </div>
+          <p class="card-desc">API keys are stored in <code>chrome.storage.local</code> on your device.
+            They are <strong>encrypted</strong> locally and accessible to the extension only.
+            Do not share your Chrome profile if you store sensitive keys here.
+            For maximum privacy, use Ollama (local, no key).</p>
+        </div>
+
+        <div class="action-row">
+          <button id="save-llm" class="btn btn-primary">Save AI Provider settings</button>
+          <button id="test-llm" class="btn btn-ghost" style="display:none">Test Connection</button>
+          <div id="llm-toast" class="inline-toast"></div>
+        </div>
+      </section>
+
+      <!-- Storage Section -->
+      <section id="storage" class="section">
+        <div class="section-header">
+          <h2 class="section-title">Storage</h2>
+          <p class="section-desc">Manage saved conversations. Chrome allows up to 5 MB for local extension storage.</p>
+        </div>
+
+        <div class="card">
+          <div class="storage-stats" id="storage-stats">
+            <div class="stat-item">
+              <div class="stat-num" id="stat-count">&mdash;</div>
+              <div class="stat-label">conversations</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num" id="stat-size">&mdash;</div>
+              <div class="stat-label">KB used</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num" id="stat-compressed">&mdash;</div>
+              <div class="stat-label">% avg compressed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num" id="stat-saved">&mdash;</div>
+              <div class="stat-label">KB saved</div>
+            </div>
+          </div>
+          <div class="storage-bar-wrap">
+            <div class="storage-bar-track">
+              <div class="storage-bar-fill" id="storage-bar-fill"></div>
+            </div>
+            <span class="storage-bar-label" id="storage-bar-label">0 / 5120 KB</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Max Conversations</h3>
+            <p class="card-desc">Oldest conversations are automatically removed when this limit is reached.</p>
+          </div>
+          <div class="input-row">
+            <input type="number" id="max-conversations" class="text-input w-24" min="10" max="200" value="50" />
+            <span class="input-unit">conversations</span>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button id="save-storage" class="btn btn-primary">Save storage settings</button>
+          <button id="clear-all-storage" class="btn btn-danger">Clear all conversations</button>
+          <div id="storage-toast" class="inline-toast"></div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="section">
+        <div class="section-header">
+          <h2 class="section-title">About</h2>
+        </div>
+        <div class="card about-card">
+          <div class="about-logo"><img src="../icons/icon48.png" width="36" height="36" alt="Capsule" style="display:block;" /></div>
+          <h2 class="about-name">Capsule</h2>
+          <p class="about-version">v2.0.0</p>
+          <p class="about-desc">Save, copy, download, and port your AI context across sessions, accounts, and platforms &mdash; Claude, ChatGPT, Gemini, DeepSeek, Perplexity, Grok, Mistral, and Kimi.</p>
+          <div class="about-links">
+            <a href="https://github.com/nimishkanungo/capsule" target="_blank" class="link">GitHub</a>
+            <span class="divider-dot">&middot;</span>
+            <a href="https://github.com/nimishkanungo/capsule/issues" target="_blank" class="link">Report Issue</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div id="global-toast" class="global-toast" aria-live="polite"></div>
+
+  <script src="../shared/llm_client.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

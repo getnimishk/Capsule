@@ -1,0 +1,32 @@
+# Capsule — .gitignore
+# Maven build outputs
+target/
+
+# Maven wrapper download cache
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE files
+.idea/
+*.iml
+*.iws
+.vscode/
+.vs/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Extension dev artifacts
+scratch/*.zip
+*.crx
+*.pem
+
+# Temporary scripts
+refactor_*.py
+fix_*.py
+scratch/
+
+# Logs
+*.log
+npm-debug.log*
