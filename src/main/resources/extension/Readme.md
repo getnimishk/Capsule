@@ -1,6 +1,8 @@
 # 💊 Capsule — Multi-AI Transfer Prompt & Context Bridge
 
 ![Chrome Extension](https://img.shields.io/badge/Platform-Chrome%20Extension%20MV3-blue.svg)
+![Core Feature](https://img.shields.io/badge/Flagship-1--Click%20Transfer%20Prompt-orange.svg)
+![Compression](https://img.shields.io/badge/Compression-Local%20NLP%20%7C%20Gemini%202.5-teal.svg)
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)
 ![Security](https://img.shields.io/badge/Security-AES--GCM--256%20%7C%20PBKDF2-success.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
@@ -25,23 +27,24 @@
 
 1. [Why Capsule Exists (Problem Statement)](#-why-capsule-exists-problem-statement)
 2. [What Makes Capsule Different](#-what-makes-capsule-different)
-3. [Key Features](#-key-features)
-4. [Feature Walkthrough (14 Core Features)](#-feature-walkthrough-14-core-features)
-5. [Screenshots](#-screenshots)
-6. [Supported AI Platforms](#-supported-ai-platforms)
-7. [How Capsule Works (Flow Diagram)](#-how-capsule-works-flow-diagram)
-8. [Architecture](#-architecture)
-9. [Security & Privacy](#-security--privacy)
-10. [Performance](#-performance)
-11. [Permissions Explained](#-permissions-explained)
-12. [Installation](#-installation)
-13. [Build from Source](#-build-from-source)
-14. [Development Guide](#-development-guide)
-15. [Project Structure](#-project-structure)
-16. [Roadmap](#-roadmap)
-17. [FAQ](#-faq)
-18. [Contributing](#-contributing)
-19. [License](#-license)
+3. [🚀 Flagship Feature: 1-Click Cross-AI Transfer Prompt](#-flagship-feature-1-click-cross-ai-transfer-prompt)
+4. [Dual Compression Pipeline (Local NLP + Optional Gemini)](#-dual-compression-pipeline-local-nlp--optional-gemini)
+5. [Feature Walkthrough (14 Core Features)](#-feature-walkthrough-14-core-features)
+6. [Screenshots](#-screenshots)
+7. [Supported AI Platforms](#-supported-ai-platforms)
+8. [How Capsule Works (Flow Diagram)](#-how-capsule-works-flow-diagram)
+9. [Architecture](#-architecture)
+10. [Security & Privacy](#-security--privacy)
+11. [Performance](#-performance)
+12. [Permissions Explained](#-permissions-explained)
+13. [Installation](#-installation)
+14. [Build from Source](#-build-from-source)
+15. [Development Guide](#-development-guide)
+16. [Project Structure](#-project-structure)
+17. [Roadmap](#-roadmap)
+18. [FAQ](#-faq)
+19. [Contributing](#-contributing)
+20. [License](#-license)
 
 ---
 
@@ -64,21 +67,66 @@ Then — **BAM.** You hit an hourly rate limit, experience a platform outage, or
 Unlike generic bookmarking or export tools, **Capsule** acts as a **dynamic multi-AI bridge**:
 - **Zero Cloud Storage / Zero Tracking:** 100% of your data stays locally inside your Chrome browser.
 - **1-Click Active Context Transfer:** Don't just save chats — transfer your active state directly into another model's prompt area.
+- **Dual Compression Engine:** Includes a **100% offline Local Extractive NLP Engine** as the default, plus optional **Gemini 2.5 Flash API Compression**.
 - **Resilient Unauthenticated Injection:** If a target AI opens in a logged-out state or behind a Cloudflare/modal gate, Capsule holds your context and auto-injects the instant you log in.
 - **Unified 8-Platform Engine:** One extension seamlessly handles Claude, ChatGPT, Gemini, DeepSeek, Perplexity, Grok, Mistral, and Kimi.
 
 ---
 
-## ⚡ Key Features
+## 🚀 Flagship Feature: 1-Click Cross-AI Transfer Prompt
 
-- 🚀 **1-Click Transfer Prompt Engine** across 8 AI platforms
-- 💡 **"Context Ready" Floating Action Banner** for unauthenticated/modal-blocked tabs
-- 🖥️ **Unified Extension Popup** with real-time fuzzy search & filters
-- 🎨 **Color-Coded Source Badges** for instant visual platform identification
-- 📋 **1-Click Plaintext Markdown Clipboard Copy**
-- 📄 **1-Click Portable JSON Download**
-- 🧠 **Optional Gemini 2.5 Flash Context Compression**
-- 🔒 **AES-GCM 256 + PBKDF2 (600,000 rounds) Security**
+The **Transfer Prompt** engine is Capsule's primary capability, built to eliminate prompt re-typing across models.
+
+### How Transfer Prompt Works:
+1. **Instant Prompt Capture:** Click **Capsule** → **Send context to [Target AI]** directly inside your prompt editor.
+2. **Context Formatting:** Capsule structures your active prompt thread with standardized continuity headers:
+   ```markdown
+   [Context from Gemini conversation: "Refactoring Auth Middleware"]
+   [Scraped: 7/20/2026, 11:45:00 AM]
+
+   User: How do I implement OAuth2 PKCE flow in Node.js?
+   Gemini: Here is the implementation using crypto module...
+
+   ---
+   I'm continuing this conversation. What are your thoughts?
+   ```
+3. **Automated Target Injection:** Capsule opens the destination AI tab (e.g. `claude.ai/new`, `chatgpt.com`, `chat.deepseek.com`, `grok.com`), waits for the DOM prompt element to mount, auto-fills the prompt editor, dispatches synthetic input events, and focuses the field for immediate sending.
+
+---
+
+## 🧠 Dual Compression Pipeline (Local NLP + Optional Gemini)
+
+Capsule features two independent context compression engines to fit your workflow:
+
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                        Capsule Compression Pipeline                          │
+│                                                                              │
+│    ┌────────────────────────────────────────────────────────────────────┐    │
+│    │  DEFAULT: Local Extractive NLP Engine (Pure JS, 100% Offline)      │    │
+│    │  • Verbatim Code Block Extraction & Protection (`...` & ```...```)│    │
+│    │  • Sentence Tokenization & Stop-Word Filtering                     │    │
+│    │  • TF-IDF Extractive Sentence Scoring & Order Preservation          │    │
+│    │  • Zero network calls / Zero external dependencies                 │    │
+│    └────────────────────────────────────────────────────────────────────┘    │
+│                                      │                                       │
+│                                      ▼ (Optional Switch in Settings)         │
+│    ┌────────────────────────────────────────────────────────────────────┐    │
+│    │  OPTIONAL: Gemini 2.5 Flash API Compression                       │    │
+│    │  • LLM Abstractive Summarization via Google Gemini 2.5 Flash API    │    │
+│    │  • Encrypted API Key Storage via AES-GCM-256 + PBKDF2 (600k)       │    │
+│    └────────────────────────────────────────────────────────────────────┘    │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
+
+1. **Local Extractive NLP Summarizer (Default):**
+   - Pure JavaScript TF-IDF sentence scoring engine running locally in your browser service worker.
+   - Extracts and preserves code blocks (` ```...``` `) and inline code verbatim.
+   - Requires zero API keys and zero internet requests.
+2. **Gemini 2.5 Flash Compression (Optional):**
+   - Abstractive LLM summarization that condenses multi-hour conversations down to active technical goals, decisions, and code blocks.
+   - Configurable via extension Settings with encrypted API key storage.
 
 ---
 
@@ -117,8 +165,8 @@ Delete individual conversation cards with a single click (featuring smooth CSS f
 ### 11. 🔄 Automatic Background Saving
 You never need to click "Save". Capsule automatically records your conversation in the background as you type and receive AI responses.
 
-### 12. 🧠 Gemini 2.5 Flash Context Compression
-Optionally condense multi-hour conversation threads down to core technical facts, active goals, and code blocks using the Gemini 2.5 Flash API.
+### 12. 🧠 Local Extractive & Optional Gemini Compression
+Compress long conversations locally using TF-IDF sentence scoring (100% offline default) or abstractive summarization via Gemini 2.5 Flash API.
 
 ### 13. 📊 Pre-Flight Token Estimator
 Calculates token counts and compression percentage savings before sending context to another AI model.
@@ -198,7 +246,7 @@ Capsule Extension (Manifest V3)
 ├── shared/
 │   ├── api_hook.js         # MAIN world network proxy interceptor
 │   ├── llm_client.js       # Encrypted Gemini API client
-│   ├── nlp_compress.js     # Context compression engine
+│   ├── nlp_compress.js     # Offline Local Extractive TF-IDF Compression Engine
 │   └── token_estimator.js  # Pre-flight token estimator
 └── popup/ & options/       # Extension UI interfaces
 ```
@@ -289,7 +337,7 @@ Capsule/
 ├── popup/                         # Popup UI (HTML, CSS, JS)
 ├── options/                       # Options UI (HTML, CSS, JS)
 ├── injectors/                     # Platform Injectors (ChatGPT, Gemini, DeepSeek, etc.)
-├── shared/                        # Encryption, Compression & Interceptors
+├── shared/                        # Encryption, Local NLP Engine, & Interceptors
 ├── icons/                         # HiDPI PNG Icons (16, 32, 48, 128px)
 └── tests/                         # Jest Test Suites
 ```
@@ -298,7 +346,7 @@ Capsule/
 
 ## 🚀 Roadmap
 
-- [x] **v2.0:** Multi-AI 8-Platform Support, Resilient Unauthenticated Floating Banner, PBKDF2 + AES-GCM 256 Security.
+- [x] **v2.0:** Multi-AI 8-Platform Support, Local Offline NLP Extractive Compression Engine, Resilient Unauthenticated Floating Banner, PBKDF2 + AES-GCM 256 Security.
 - [ ] **v2.1:** IndexedDB Migration (unlimited history), Local LLM Support (Ollama, LM Studio, Open WebUI).
 - [ ] **v2.2:** WASM Local Vector RAG Search & Visual Context Diffs.
 - [ ] **v3.0:** WebRTC Encrypted Peer-to-Peer Multi-Device Sync & Firefox/Safari Ports.
@@ -309,6 +357,9 @@ Capsule/
 
 #### **Q: Is my conversation data uploaded to any server?**
 **No.** 100% of your conversation history stays strictly on your local computer inside Chrome's `chrome.storage.local`.
+
+#### **Q: How does local compression work without an API key?**
+Capsule includes a 100% offline Local Extractive NLP Engine (`shared/nlp_compress.js`) that uses sentence TF-IDF scoring and verbatim code block extraction right inside your browser. No external API key or network request is needed.
 
 #### **Q: What happens if I am not logged into the destination AI?**
 Capsule holds your prompt context safely in storage and displays a floating top bar: `Capsule Context Ready [Inject Now] [Copy]`. Once you log in, Capsule auto-injects your prompt automatically!
