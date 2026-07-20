@@ -263,7 +263,17 @@ let _panel = null, _panelOpen = false;
 function buildPanel() {
   const panel = document.createElement("div");
   panel.id = "cc-ask-ai-panel";
-  const hdr = document.createElement("div"); hdr.className = "cc-panel-hdr"; hdr.textContent = "Send context to";
+  const hdr = document.createElement("div"); hdr.className = "cc-panel-hdr"; hdr.style.display = "flex";
+  hdr.style.alignItems = "center";
+  hdr.style.justifyContent = "space-between";
+  hdr.innerHTML = 
+    <span>Send context to</span>
+    <button class="cc-close-panel-btn" type="button" title="Close panel" style="background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:14px;padding:0 4px;line-height:1;transition:color 0.15s;">&#x2715;</button>
+  ;
+  hdr.querySelector(".cc-close-panel-btn").addEventListener("click", (e) => {
+    e.stopPropagation();
+    closePanel();
+  });
   panel.appendChild(hdr);
   for (const ai of CC_AI_OPTIONS) {
     const opt = document.createElement("button"); opt.className = "cc-ai-opt"; opt.type = "button";

@@ -41,6 +41,7 @@ function init() {
 }
 
 function bindUI() {
+  document.getElementById("close-popup-btn")?.addEventListener("click", () => window.close());
   document.getElementById("export-btn").addEventListener("click", exportAllHandler);
 
   document.getElementById("clear-all-btn").addEventListener("click", () => {
