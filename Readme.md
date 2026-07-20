@@ -1,170 +1,119 @@
-# 💊 Capsule v2.0 — Multi-AI Context Bridge & Exporter
+# Capsule — Multi-AI Context Bridge & Exporter
 
-![Chrome Extension](https://img.shields.io/badge/Platform-Chrome%20Extension-blue)
-![Manifest V3](https://img.shields.io/badge/Manifest-V3-green)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-![Status](https://img.shields.io/badge/Status-Active-success)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
-![Version](https://img.shields.io/badge/Version-2.0.0-purple)
+[![Chrome Extension](https://img.shields.io/badge/Chrome_Extension-MV3-blue.svg)](https://developer.chrome.com/docs/extensions/mv3/intro/)
+[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](pom.xml)
+[![Security](https://img.shields.io/badge/Security-AES--GCM--256-success.svg)](shared/llm_client.js)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-2.0.0-purple.svg)](package.json)
 
-> **Never lose your AI context again.** Save, copy, download, and seamlessly transfer your AI conversation state across **8 major AI platforms** — Claude, ChatGPT, Gemini, DeepSeek, Perplexity, Grok, Mistral, and Kimi (+ NotebookLM integration).
-
-```
-   ██████╗ █████╗ ██████╗ ███████╗██╗   ██╗██╗     ███████╗
-  ██╔════╝██╔══██╗██╔══██╗██╔════╝██║   ██║██║     ██╔════╝
-  ██║     ███████║██████╔╝███████╗██║   ██║██║     █████╗  
-  ██║     ██╔══██║██╔═══╝ ╚════██║██║   ██║██║     ██╔══╝  
-  ╚██████╗██║  ██║██║     ███████║╚██████╔╝███████╗███████╗
-   ╚═════╝╚═╝  ╚═╝╚═╝     ╚══════╝ ╚═════╝ ╚══════╝╚══════╝
-   
-             ──▶ MULTI-AI CONTEXT BRIDGE ◀──
-```
+Capsule is a high-performance, privacy-first Chrome Extension (Manifest V3) that continuously captures, indexes, and transfers your conversation state across **8 major AI platforms**: **Claude**, **ChatGPT**, **Gemini**, **DeepSeek**, **Perplexity**, **Grok**, **Mistral**, and **Kimi**, plus **NotebookLM**.
 
 ---
 
-## 📋 Table of Contents
+## 📌 Executive Summary & Core Value
 
-1. [The Problem](#-the-problem)
-2. [The Solution](#-the-solution)
-3. [Supported AI Platforms & Matrix](#-supported-ai-platforms--matrix)
-4. [Comprehensive Feature Breakdown](#-comprehensive-feature-breakdown)
-   - [Unified Popup UI](#1-unified-popup-ui)
-   - [Injected Context Pill & Export Panel](#2-injected-context-pill--export-panel)
-   - [Resilient Context Injection (Unauthenticated / Pop-up Handling)](#3-resilient-context-injection)
-   - [AI Context Compression Pipeline](#4-ai-context-compression-pipeline)
-   - [Security & Cryptography System](#5-security--cryptography-system)
-   - [DOM Scraper & Event Proxy Interceptor](#6-dom-scraper--event-proxy-interceptor)
-5. [Configuration & Customization Guide](#-configuration--customization-guide)
-   - [Extension Options Page](#1-extension-options-page)
-   - [Configuring Gemini API for Compression](#2-configuring-gemini-api-for-compression)
-   - [Storage Architecture & Keys](#3-storage-architecture--keys)
-6. [Architecture & Data Flow](#-architecture--data-flow)
-7. [Installation & Build Guide](#-installation--build-guide)
-8. [Testing & Quality Assurance](#-testing--quality-assurance)
-9. [🚀 Next Release Plan & Roadmap (v2.1 - v3.0)](#-next-release-plan--roadmap)
-10. [File Structure](#-file-structure)
-11. [License](#-license)
+Modern LLM workflows often suffer from **context fragmentation**. When you hit an hourly rate limit, experience a platform outage, or need to cross-verify code solutions across models, transferring multi-turn conversations manually leads to lost context, formatted code degradation, and wasted time.
+
+**Capsule** addresses this by operating directly at the browser layer:
+- **Zero Cloud Middleman:** All conversation capture, storage, and cross-platform injections occur 100% locally inside your browser runtime.
+- **Universal Context Portability:** Shift from Claude to ChatGPT, or Gemini to DeepSeek with a single click — retaining code blocks, technical decisions, and conversation history.
+- **Resilient Execution Engine:** Handles unauthenticated tabs, modal overlays, login gates, and single-page application (SPA) DOM hydration seamlessly.
 
 ---
 
-## 😤 The Problem
+## 🌐 Platform Capability & Selector Matrix
 
-You've spent **2 hours** on an intense session with an AI model:
-- Debugging a complex microservice architecture
-- Designing an entire SQL database schema together
-- Making 15 architectural trade-offs and code decisions
-- Writing 500 lines of code collaboratively
+Capsule injects custom UI components and extraction adapters tailored to each AI platform's specific DOM structure:
 
-Then — **BAM.** You hit your hourly message limit. Or the AI service experiences an outage. Or you want to compare how Claude vs. ChatGPT vs. DeepSeek solves the remaining problem.
-
-**Everything is lost.** The context, decisions, and nuance are gone. You have to manually copy-paste snippets or re-explain the entire conversation to a fresh AI that has zero context about what you've built.
-
----
-
-## 💡 The Solution
-
-```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                                                                              │
-│  Claude / ChatGPT / Gemini / DeepSeek / Perplexity / Grok / Mistral / Kimi   │
-│                                      │                                       │
-│                                      ▼                                       │
-│                           💊 Capsule v2.0 Extension                          │
-│                                      │                                       │
-│             ┌────────────────────────┴────────────────────────┐              │
-│             ▼                                                 ▼              │
-│    1-Click Auto-Inject                              Floating Action Banner   │
-│    (Target AI input box)                          (For unauthenticated/popups) │
-│                                                                              │
-└──────────────────────────────────────────────────────────────────────────────┘
-```
-
-**Capsule v2.0** is a local, privacy-first Chrome extension that automatically records your conversations across 8 AI platforms and lets you port, copy, compress, or export your context with a single click.
-
----
-
-## 🌐 Supported AI Platforms & Matrix
-
-| AI Platform | Domain Match | Input Area Selector / Mechanism | Scraper Engine | Status |
+| AI Platform | Supported Host Patterns | Input Target Selectors | Context Extractor Strategy | Injection Method |
 | :--- | :--- | :--- | :--- | :--- |
-| **Claude** | `claude.ai` | `div.ProseMirror`, `div[contenteditable="true"]` | API Interceptor + DOM Observer | ✅ Production |
-| **ChatGPT** | `chatgpt.com` | `#prompt-textarea`, `textarea`, `div.ProseMirror` | `[data-message-author-role]` DOM Scraper | ✅ Production |
-| **Gemini** | `gemini.google.com` | `rich-textarea .ql-editor`, `[contenteditable]` | Angular DOM Scraper | ✅ Production |
-| **DeepSeek** | `chat.deepseek.com` | `#chat-input`, `textarea` | Virtualized List Scraper | ✅ Production |
-| **Perplexity**| `perplexity.ai` | `textarea[placeholder*="Ask"]`, `[role="textbox"]` | AnswerBody / UserMessage Scraper | ✅ Production |
-| **Grok** | `grok.com`, `x.com` | `textarea`, `div[data-testid="tweetTextarea_0"]` | DraftJS / Textarea Scraper | ✅ Production |
-| **Mistral** | `chat.mistral.ai` | `textarea[placeholder*="Ask"]`, `textarea` | Markdown Node Scraper | ✅ Production |
-| **Kimi** | `kimi.ai` | `div[contenteditable="true"]`, `textarea` | Segment Node Scraper | ✅ Production |
-| **NotebookLM**| `notebooklm.google.com` | Automated Source Dialog & Text Importer | 5-Step Pipeline Automator | ✅ Production |
+| **Claude** | `*.claude.ai` | `div.ProseMirror[contenteditable="true"]`, `div[contenteditable="true"]` | API Interceptor Proxy + DOM Observer | `document.execCommand('insertText')` |
+| **ChatGPT** | `chatgpt.com`, `*.chatgpt.com` | `#prompt-textarea`, `textarea[tabindex="0"]`, `div.ProseMirror` | `[data-message-author-role]` DOM Parser | React Native Value Setter + Input Events |
+| **Gemini** | `gemini.google.com` | `rich-textarea .ql-editor`, `[role="textbox"]` | Angular Element Stream Parser | Custom Event Chain + Dispatch |
+| **DeepSeek** | `chat.deepseek.com`, `*.deepseek.com` | `#chat-input`, `textarea[placeholder*="DeepSeek"]` | Virtualized Message Tree Parser | Native Setter + `input`/`change` Events |
+| **Perplexity** | `perplexity.ai`, `*.perplexity.ai` | `textarea[placeholder*="Ask" i]`, `[role="textbox"]` | Query & Answer Container Harvester | Synthetic React Event Dispatch |
+| **Grok** | `grok.com`, `*.grok.com`, `x.com` | `textarea`, `div[data-testid="tweetTextarea_0"]` | DraftJS & Standard Textarea Parser | Multi-target Input Setter |
+| **Mistral** | `chat.mistral.ai`, `*.mistral.ai` | `textarea[placeholder*="Ask" i]`, `textarea` | Markdown Response Node Scraper | Native Property Setter |
+| **Kimi** | `kimi.ai`, `*.kimi.ai`, `kimi.moonshot.cn` | `div[contenteditable="true"]`, `textarea` | Segmented Node Parser | `execCommand` + Native Fallback |
+| **NotebookLM** | `notebooklm.google.com`, `notebooklm.google` | Source Modal Dialog Automated Inputs | DOM Automation Pipeline | 5-Step Automated Modal Ingestion |
 
 ---
 
-## ⚡ Comprehensive Feature Breakdown
+## ⚡ In-Depth Technical Features
 
-### 1. Unified Popup UI
-- **Multi-Source Aggregation:** Displays saved conversations from all 8 AI services in one chronological list.
-- **Color-Coded Source Badges:** Visually distinguish between `CLAUDE` (orange), `CHATGPT` (green), `GEMINI` (blue), `DEEPSEEK` (cyan), `PERPLEXITY` (teal), `GROK` (dark blue), `MISTRAL` (amber), and `KIMI` (indigo).
-- **Instant Live Search:** Real-time fuzzy filter across conversation titles, system prompts, user queries, and AI responses.
-- **Message Expand / Collapse:** Inline message history viewer inside the popup without opening extra windows.
-- **Per-Card Controls:** 
-  - 📥 **Download JSON:** Download a single conversation as a clean portable Capsule JSON file.
-  - 🗑️ **Delete Card:** Delete individual conversations with smooth CSS fade animations.
-- **Global Actions:** Bulk JSON export of all saved conversations and one-click clear history.
+### 1. Unified Management Console (Popup UI)
+- **Aggregated Stream:** Consolidates saved histories from all 8 supported AI platforms into a single unified workspace.
+- **Real-Time Fuzzy Search:** Instantly query conversation titles, code snippets, user prompts, and AI responses.
+- **Visual Source Markers:** Distinct color-coded badges indicating origin (`CLAUDE`, `CHATGPT`, `GEMINI`, `DEEPSEEK`, `PERPLEXITY`, `GROK`, `MISTRAL`, `KIMI`).
+- **Granular Data Operations:**
+  - 💾 **Export Individual Capsule:** Download a single conversation as a structured portable `.json` file.
+  - 🗑️ **Animated Eviction:** Remove specific items with smooth UI transition animations.
+  - 📦 **Bulk Backup:** Export your entire conversation store in a single JSON payload.
 
-### 2. Injected Context Pill & Export Panel
-- **Native Styling:** Capsule injects a sleek pill button (`Capsule`) inside the input bar of every supported AI platform that adapts to light/dark themes.
-- **One-Click Target Transfer:** Pick any destination AI (e.g. from Gemini to Claude or ChatGPT to Grok) — Capsule opens the tab, waits for the target input element, and injects the formatted conversation history.
-- **Copy to Clipboard:** Copy formatted markdown context to clipboard in 1 click.
-- **Download JSON:** Download conversation JSON directly from the inline panel on the active AI page.
+### 2. Embedded Control Bar & Context Transfer Panel
+- **Adaptive Inline Controls:** Injects a native `Capsule` control pill into each platform's prompt toolbar.
+- **Direct Cross-Platform Dispatch:** Select a target platform from the inline popover panel; Capsule opens a new tab, waits for DOM readiness, and auto-injects the conversation state.
+- **Instant Plaintext Copy:** One-click copy of formatted markdown conversation context directly to the OS clipboard.
 
-### 3. Resilient Context Injection (Unauthenticated / Pop-up Handling)
-- **Unauthenticated / Login Fallback:** If you open a target AI where you are logged out or blocked by a Cloudflare / cookie overlay:
-  - Capsule **safely holds your scraped context in local storage** (5-minute TTL).
-  - Capsule displays a floating top pill on the target site:
-    `💡 Capsule Context Ready ["Title..."] [Inject Now] [Copy] [✕]`
-- **Background Auto-Retry Polling:** A background observer polls every 1s for up to 90 seconds. As soon as you log in or close the modal and the chat input mounts, Capsule **automatically auto-injects** the prompt and dismisses the banner!
+### 3. Resilient Unauthenticated & Modal Handling System
+If a target AI platform opens in a logged-out state, triggers a Cloudflare challenge, or presents a modal popup overlay:
+- **Persistent Storage Hold:** The context payload is preserved in `chrome.storage.local` under `pending_context_inject` (5-minute TTL).
+- **Floating Action Banner:** Displays a non-intrusive floating control bar at top of the window:
+  `💡 Capsule Context Ready ["Title..."] [Inject Now] [Copy] [✕]`
+- **Background Auto-Retry Loop:** An asynchronous polling loop monitors the page for up to 90 seconds. Once you log in or dismiss the modal, Capsule **automatically auto-fills** the prompt box and clears the banner.
 
-### 4. AI Context Compression Pipeline
-- **Gemini 2.5 Flash Compression:** Optional integration with Gemini 2.5 Flash API to compress lengthy multi-hour conversations down to essential technical facts, code snippets, and active decisions.
-- **Token Estimator:** Built-in token counter calculates raw vs. compressed token savings before injection.
+### 4. Smart Context Compression Engine
+- **Gemini 2.5 Flash Integration:** Optional AI-powered compression distills long multi-hour discussions down to essential code blocks, technical decisions, and active goals.
+- **Pre-flight Token Estimation:** Built-in token counter calculates token savings prior to context transfer.
 
-### 5. Security & Cryptography System
-- **AES-GCM 256 Encryption:** API keys saved in extension options are encrypted before write to `chrome.storage.local`.
-- **Per-Installation Salt & PBKDF2:** Keys are derived using PBKDF2 with **600,000 iterations** and a 16-byte cryptographically random per-installation salt (`cc_crypto_salt`).
-- **No Plaintext Fallback:** Throws strict errors if decryption fails, preventing plaintext key leaks.
-
-### 6. DOM Scraper & Event Proxy Interceptor
-- **`api_hook.js`:** Intercepts JSON network payloads for platforms using API responses (Claude). Built with strict domain checks (`isAIUrl`) to prevent CSP errors on Google/analytics domains.
-- **Debounced Mutation Observer:** MutationObserver attached to `document.body` saves chat updates after 1.5 seconds of streaming pause to avoid saving partial sentences mid-generation.
+### 5. Enterprise-Grade Security & Encryption
+- **AES-GCM 256 Bit Encryption:** User-provided API keys are encrypted before being written to persistent extension storage.
+- **Key Derivation via PBKDF2:** Master key derived using **600,000 iterations** of PBKDF2 combined with a cryptographically secure 16-byte installation-unique salt (`cc_crypto_salt`).
+- **Strict Error Boundaries:** Fails securely without fallback to unencrypted plaintext storage.
 
 ---
 
-## ⚙️ Configuration & Customization Guide
+## ⚙️ Configuration & Storage Engine
 
-### 1. Extension Options Page
-Open the extension options by right-clicking the Capsule extension icon in Chrome → **Options**, or navigating to `chrome-extension://<EXTENSION_ID>/options/options.html`.
+### Extension Options Configuration
+Access extension settings by navigating to `chrome-extension://<EXTENSION_ID>/options/options.html` or right-clicking the extension icon → **Options**.
 
-In Options, you can configure:
-- **Gemini API Key:** Enter your Google Gemini API key to enable AI-powered conversation compression.
-- **Default Export Format:** Choose between Plain Text Markdown or Portable JSON.
-- **Max Saved Conversations:** Set local storage limit (default: 50 conversations).
+Configurable parameters:
+- **Gemini API Key:** Encrypted API key for context compression.
+- **Storage Limits:** Adjust local conversation retention caps (Default: 50 items).
+- **Export Preferences:** Choose default export mode (Markdown vs Portable JSON).
 
-### 2. Configuring Gemini API for Compression
-1. Get a free API key from [Google AI Studio](https://aistudio.google.com/).
-2. Open Capsule **Options**.
-3. Paste your API key and click **Save Settings**.
-4. The key is instantly encrypted with AES-GCM 256 and stored securely.
+### Internal Storage Schema
+Data is managed locally inside `chrome.storage.local`:
+```typescript
+interface CapsuleStorageSchema {
+  cc_all_conversations: CapsuleEntry[];
+  pending_context_inject?: {
+    target: string;
+    context: string;
+    ts: number;
+  };
+  cc_crypto_salt?: string;
+  gemini_api_key_enc?: string;
+}
 
-### 3. Storage Architecture & Keys
-Capsule uses `chrome.storage.local` with standardized storage keys:
-- `cc_all_conversations`: Array of saved conversation objects.
-- `pending_context_inject`: Temporary object holding context targeted for injection into another AI tab.
-- `cc_crypto_salt`: 16-byte hex salt generated per installation.
-- `gemini_api_key_enc`: Encrypted ciphertext of user's Gemini API key.
+interface CapsuleEntry {
+  id: string;
+  title: string;
+  url: string;
+  source: string;
+  savedAt: string;
+  messages: Array<{
+    type: 'user' | 'assistant';
+    content: string;
+    timestamp?: string;
+  }>;
+}
+```
 
 ---
 
-## 🏗️ Architecture & Data Flow
+## 🏗️ Architecture & Module Structure
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
@@ -191,19 +140,10 @@ Capsule uses `chrome.storage.local` with standardized storage keys:
 
 ---
 
-## 📦 Installation & Build Guide
+## 📦 Build & Installation Guide
 
-### Option A: Install Unpacked Extension (Development)
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/getnimishk/Capsule.git
-   ```
-2. Open Google Chrome and navigate to `chrome://extensions`.
-3. Toggle **Developer mode** on (top right).
-4. Click **Load unpacked** and select the `target/capsule-extension` folder (or `src/main/resources/extension`).
-
-### Option B: Production Maven Package Build
-Prerequisites: Java 17+, Apache Maven 3.8+
+### Building Unpacked Extension from Source
+Prerequisites: **Java 17+**, **Apache Maven 3.8+**, **Node.js 18+**
 
 ```bash
 # Clone repository
@@ -213,92 +153,46 @@ cd Capsule
 # Run Maven Release Build
 mvn clean package -P release
 ```
-The compiled ZIP archive will be located at:
-`target/capsule-2.0.0.zip`
+The compiled distribution package is output to: `target/capsule-2.0.0.zip`.
+
+### Loading in Google Chrome
+1. Open Chrome and go to `chrome://extensions`.
+2. Enable **Developer mode** (toggle in top-right corner).
+3. Click **Load unpacked** and select `target/capsule-extension` (or `src/main/resources/extension`).
 
 ---
 
-## 🧪 Testing & Quality Assurance
+## 🧪 Testing Suite
 
-Capsule includes a full suite of automated unit tests using **Jest**:
+Run unit tests via **Jest**:
 
 ```bash
-# Run unit tests
+# Install dependencies
+npm install
+
+# Run Jest unit test suite
 npm test
 ```
 
-### Test Suites Included:
-- `tests/storage.test.js`: Validates `chrome.storage.local` CRUD operations, deduplication, and max item eviction.
-- `tests/ui.test.js`: Validates DOM sanitization, panel creation, and event dispatching.
+Test coverage includes:
+- `tests/storage.test.js`: Storage CRUD operations, capacity eviction logic, and indexing.
+- `tests/ui.test.js`: DOM sanitization, panel creation, and event handling.
 
 ---
 
-## 🚀 Next Release Plan & Roadmap (v2.1 - v3.0)
+## 🚀 Future Roadmap & Development Plan
 
-```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                            CAPSULE ROADMAP                                   │
-│                                                                              │
-│  v2.1 (Q3 2026) ──▶ IndexedDB Storage & Local LLM (Ollama/WebUI) Support    │
-│  v2.2 (Q3 2026) ──▶ Semantic Vector RAG Search & Context Diffs               │
-│  v3.0 (Q4 2026) ──▶ Encrypted Peer-to-Peer Multi-Browser Sync (WebRTC)       │
-└──────────────────────────────────────────────────────────────────────────────┘
-```
+### **v2.1 — Storage Scalability & Local Model Ecosystem (Q3 2026)**
+- **IndexedDB Storage Engine:** Transition from `chrome.storage.local` to IndexedDB to allow unlimited conversation storage with code snippet indexing.
+- **Local LLM Support:** Dedicated injection adapters for **Ollama**, **LM Studio**, and **Open WebUI**.
 
-### 🗓️ Upcoming Releases
+### **v2.2 — WASM Semantic Search & Context Diffing (Q3 2026)**
+- **Local Vector Search (RAG):** In-browser vector embeddings generated via WASM for semantic search across past conversations.
+- **Visual Context Diffs:** Highlight what information was added or modified during model transfer.
 
-#### **v2.1 — IndexedDB Storage & Local AI Ecosystem Support**
-- **Unlimited History:** Migrate from `chrome.storage.local` (5MB limit) to `IndexedDB` for storing thousands of conversation capsules with attachments and code snippets.
-- **Local AI Support:** Add native injectors for **Ollama**, **LM Studio**, and **Open WebUI**.
-
-#### **v2.2 — Semantic Vector Search (RAG) & Context Diffing**
-- **Semantic Search:** Local vector embeddings running in WASM to search past conversations by topic, concept, or code function name.
-- **Context Diffs:** Visual diff view highlighting what changed between conversation iterations when transferring context.
-
-#### **v3.0 — Encrypted Peer-to-Peer Sync & Cross-Browser Support**
-- **E2E Encrypted P2P Sync:** WebRTC peer-to-peer sync between your work laptop, home PC, and mobile browser without central servers.
-- **Cross-Browser Manifest V3:** Firefox (Gecko) and Safari (Webkit) extension packages.
-
----
-
-## 📁 File Structure
-
-```
-Capsule/
-├── manifest.json                  # Manifest V3 Extension Configuration
-├── background.js                  # Service Worker & Storage Router
-├── content.js                     # Claude Content Script & DOM Observer
-├── pom.xml                        # Maven Build Specification
-├── package.json                   # NPM Dependencies & Test Scripts
-├── Readme.md                      # Complete Project Documentation
-├── LICENSE                        # MIT License
-├── popup/
-│   ├── popup.html                 # Extension Popup Interface
-│   ├── popup.js                   # Popup Logic & Search Controller
-│   └── popup.css                  # Modern Glassmorphic Dark Styling
-├── options/
-│   ├── options.html               # Extension Settings Page
-│   ├── options.js                 # AES Encryption & Storage Settings
-│   └── options.css                # Options Page Styles
-├── injectors/
-│   ├── chatgpt.js                 # ChatGPT Injector
-│   ├── gemini.js                  # Gemini Injector
-│   ├── deepseek.js                # DeepSeek Injector
-│   ├── perplexity.js              # Perplexity Injector
-│   ├── grok.js                    # Grok Injector
-│   ├── mistral.js                 # Mistral Injector
-│   ├── kimi.js                    # Kimi Injector
-│   └── notebooklm.js              # NotebookLM Automator
-├── shared/
-│   ├── api_hook.js                # Network Event Proxy Interceptor
-│   ├── llm_client.js              # Encrypted Gemini API Client
-│   ├── nlp_compress.js            # Heuristic & LLM Context Compressor
-│   ├── selectors.js               # Cross-Platform DOM Selectors
-│   └── token_estimator.js         # Token Estimator Engine
-├── assets/                        # Documentation Screenshots & Diagrams
-├── icons/                         # HiDPI Extension Icons (16, 32, 48, 128px)
-└── tests/                         # Jest Unit Test Suites
-```
+### **v3.0 — Encrypted Multi-Device Sync (Q4 2026)**
+- **Peer-to-Peer WebRTC Sync:** End-to-end encrypted device synchronization without central server storage.
+- **Cross-Browser Ports:** Native Manifest V3 releases for Firefox and Safari.
 
 ---
 
@@ -306,8 +200,6 @@ Capsule/
 
 Distributed under the **MIT License**. See `LICENSE` for details.
 
----
-
 **Author:** Nimish Kanungo  
 **GitHub:** [@getnimishk](https://github.com/getnimishk)  
-**Project Link:** [https://github.com/getnimishk/Capsule](https://github.com/getnimishk/Capsule)
+**Repository:** [https://github.com/getnimishk/Capsule](https://github.com/getnimishk/Capsule)
