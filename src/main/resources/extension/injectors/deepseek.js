@@ -546,9 +546,24 @@ function createAskAIButton() {
   return btn;
 }
 
-// DeepSeek toolbar injection
 function findDeepSeekSlot() {
-  return document.querySelector(".ec4f5d61");
+  const slot = document.querySelector(".ec4f5d61") ||
+               document.querySelector("#chat-input")?.parentElement ||
+               document.querySelector("textarea")?.parentElement ||
+               document.querySelector("[role='textbox']")?.parentElement;
+  if (slot) return slot;
+
+  let floatWrapper = document.getElementById("cc-floating-wrapper");
+  if (!floatWrapper) {
+    floatWrapper = document.createElement("div");
+    floatWrapper.id = "cc-floating-wrapper";
+    Object.assign(floatWrapper.style, {
+      position: "fixed", bottom: "84px", right: "28px", zIndex: "2147483647",
+      display: "flex", alignItems: "center", gap: "8px"
+    });
+    document.body.appendChild(floatWrapper);
+  }
+  return floatWrapper;
 }
 
 function injectDeepSeekButton() {
@@ -576,7 +591,7 @@ function watchForButtonRemoval() {
 let _injectAttempts = 0;
 function retryInjectButton() {
   if (document.getElementById("cc-ask-ai-btn")) { watchForButtonRemoval(); return; }
-  if (_injectAttempts++ > 30) return;
+  // continuous retry fallback
   injectDeepSeekButton();
   if (!document.getElementById("cc-ask-ai-btn")) {
     setTimeout(retryInjectButton, 500);

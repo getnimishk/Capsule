@@ -590,11 +590,28 @@ function createAskAIButton() {
   return btn;
 }
 
-// ChatGPT toolbar injection
 function findChatGPTSlot() {
-  const plusBtn = document.querySelector('button[data-testid="composer-plus-btn"]');
-  if (!plusBtn) return null;
-  return plusBtn.closest("span") || plusBtn.parentElement;
+  const plusBtn = document.querySelector('button[data-testid="composer-plus-btn"]') ||
+                  document.querySelector('button[aria-label*="Add" i]') ||
+                  document.querySelector('button[aria-label*="Attach" i]') ||
+                  document.querySelector('button[aria-label*="Upload" i]');
+  if (plusBtn) return plusBtn.closest("span") || plusBtn.parentElement;
+
+  const sendBtn = document.querySelector('button[data-testid="send-button"]') ||
+                  document.querySelector('button[aria-label*="Send" i]');
+  if (sendBtn && sendBtn.parentElement) return sendBtn.parentElement;
+
+  let floatWrapper = document.getElementById("cc-floating-wrapper");
+  if (!floatWrapper) {
+    floatWrapper = document.createElement("div");
+    floatWrapper.id = "cc-floating-wrapper";
+    Object.assign(floatWrapper.style, {
+      position: "fixed", bottom: "84px", right: "28px", zIndex: "2147483647",
+      display: "flex", alignItems: "center", gap: "8px"
+    });
+    document.body.appendChild(floatWrapper);
+  }
+  return floatWrapper;
 }
 
 function injectChatGPTButton() {
@@ -622,7 +639,7 @@ function watchForButtonRemoval() {
 let _injectAttempts = 0;
 function retryInjectButton() {
   if (document.getElementById("cc-ask-ai-btn")) { watchForButtonRemoval(); return; }
-  if (_injectAttempts++ > 30) return;
+  // continuous retry fallback
   injectChatGPTButton();
   if (!document.getElementById("cc-ask-ai-btn")) {
     setTimeout(retryInjectButton, 500);

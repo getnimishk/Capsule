@@ -672,7 +672,7 @@ function isConversationPage() {
 let _injectAttempts = 0;
 function retryInject() {
   if (document.getElementById(CC_BTN_ID)) return;
-  if (_injectAttempts++ > 30) return;
+  // continuous retry fallback
   injectButton();
   if (!document.getElementById(CC_BTN_ID)) setTimeout(retryInject, 400);
 }

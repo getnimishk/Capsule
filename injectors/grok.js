@@ -304,12 +304,22 @@ function createAskAIButton() {
 }
 
 function findGrokSlot() {
-  // Grok uses Twitter toolbar â€” look for the action bar with emoji/gif buttons
-  const toolbar = document.querySelector('[data-testid="toolBar"]');
+  const toolbar = document.querySelector('[data-testid="toolBar"]') ||
+                  document.querySelector('textarea')?.parentElement ||
+                  document.querySelector('div[contenteditable="true"]')?.parentElement;
   if (toolbar) return toolbar;
-  // Fallback: the div containing the text input
-  const inp = findGrokInput();
-  return inp ? inp.closest('[role="group"]') || inp.parentElement : null;
+
+  let floatWrapper = document.getElementById("cc-floating-wrapper");
+  if (!floatWrapper) {
+    floatWrapper = document.createElement("div");
+    floatWrapper.id = "cc-floating-wrapper";
+    Object.assign(floatWrapper.style, {
+      position: "fixed", bottom: "84px", right: "28px", zIndex: "2147483647",
+      display: "flex", alignItems: "center", gap: "8px"
+    });
+    document.body.appendChild(floatWrapper);
+  }
+  return floatWrapper;
 }
 
 function injectGrokButton() {
@@ -332,7 +342,7 @@ function watchForButtonRemoval() {
 let _injectAttempts = 0;
 function retryInjectButton() {
   if (document.getElementById("cc-ask-ai-btn")) { watchForButtonRemoval(); return; }
-  if (_injectAttempts++ > 30) return;
+  // continuous retry fallback
   injectGrokButton();
   if (!document.getElementById("cc-ask-ai-btn")) setTimeout(retryInjectButton, 500);
   else watchForButtonRemoval();
@@ -389,7 +399,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 });
 
 function init() {
-  if (!window.location.pathname.startsWith("/i/grok")) return;
+  if (window.location.hostname.includes("x.com") && !window.location.pathname.includes("grok")) return;
   tryInjectContext();
   retryInjectButton();
 }

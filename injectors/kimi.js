@@ -294,11 +294,20 @@ function createAskAIButton() {
 }
 
 function findKimiSlot() {
-  // Look for bottom input wrap/toolbar containers
-  const slot = document.querySelector('[class*="input-wrap" i], [class*="chat-input" i], [class*="editor-wrap" i]');
-  if (slot) return slot;
   const inp = findKimiInput();
-  return inp ? inp.parentElement : null;
+  if (inp && inp.parentElement) return inp.parentElement;
+
+  let floatWrapper = document.getElementById("cc-floating-wrapper");
+  if (!floatWrapper) {
+    floatWrapper = document.createElement("div");
+    floatWrapper.id = "cc-floating-wrapper";
+    Object.assign(floatWrapper.style, {
+      position: "fixed", bottom: "84px", right: "28px", zIndex: "2147483647",
+      display: "flex", alignItems: "center", gap: "8px"
+    });
+    document.body.appendChild(floatWrapper);
+  }
+  return floatWrapper;
 }
 
 function injectKimiButton() {
@@ -322,7 +331,7 @@ function watchForButtonRemoval() {
 let _injectAttempts = 0;
 function retryInjectButton() {
   if (document.getElementById("cc-ask-ai-btn")) { watchForButtonRemoval(); return; }
-  if (_injectAttempts++ > 30) return;
+  // continuous retry fallback
   injectKimiButton();
   if (!document.getElementById("cc-ask-ai-btn")) setTimeout(retryInjectButton, 500);
   else watchForButtonRemoval();
