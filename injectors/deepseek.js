@@ -277,7 +277,11 @@ function ensureStyles() {
       padding: 0 8px !important;
       height: 32px !important;
       min-width: 0 !important;
-      background: transparent !important;
+      background: #18181b !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,0.25) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important;
       border: 1.5px solid var(--dsw-alias-border-secondary, rgba(255,255,255,0.12)) !important;
       border-radius: 8px !important;
       color: var(--dsw-alias-label-primary, rgba(255,255,255,0.7)) !important;
@@ -358,7 +362,11 @@ function ensureStyles() {
       gap: 10px !important;
       width: 100% !important;
       padding: 8px 10px !important;
-      background: transparent !important;
+      background: #18181b !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,0.25) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important;
       border: none !important;
       border-radius: 8px !important;
       cursor: pointer !important;
@@ -390,7 +398,11 @@ function ensureStyles() {
       justify-content: center !important;
       gap: 6px !important;
       padding: 7px 10px !important;
-      background: transparent !important;
+      background: #18181b !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,0.25) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important;
       border: 1px solid rgba(255,255,255,0.08) !important;
       border-radius: 8px !important;
       color: rgba(255,255,255,0.55) !important;

@@ -237,14 +237,22 @@ function ensureStyles() {
   const s = document.createElement("style");
   s.id = "cc-styles";
   s.textContent = `
-    #cc-ask-ai-btn { display: inline-flex !important; align-items: center !important; gap: 5px !important; padding: 0 10px !important; height: 32px !important; background: transparent !important; border: 1px solid rgba(255,255,255,0.15) !important; border-radius: 8px !important; color: rgba(255,255,255,0.65) !important; cursor: pointer !important; font-family: system-ui, sans-serif !important; font-size: 12px !important; font-weight: 600 !important; transition: background 0.15s, border-color 0.15s, color 0.15s !important; flex-shrink: 0 !important; white-space: nowrap !important; outline: none !important; box-shadow: none !important; }
+    #cc-ask-ai-btn { display: inline-flex !important; align-items: center !important; gap: 5px !important; padding: 0 10px !important; height: 32px !important; background: #18181b !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,0.25) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important; border: 1px solid rgba(255,255,255,0.15) !important; border-radius: 8px !important; color: rgba(255,255,255,0.65) !important; cursor: pointer !important; font-family: system-ui, sans-serif !important; font-size: 12px !important; font-weight: 600 !important; transition: background 0.15s, border-color 0.15s, color 0.15s !important; flex-shrink: 0 !important; white-space: nowrap !important; outline: none !important; box-shadow: none !important; }
     #cc-ask-ai-btn:hover { background: rgba(255,255,255,0.07) !important; border-color: rgba(255,255,255,0.3) !important; color: rgba(255,255,255,0.9) !important; }
     #cc-ask-ai-btn.cc-active { background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.35) !important; }
     #cc-ask-ai-panel { position: fixed !important; background: #18181b !important; border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 14px !important; padding: 8px !important; box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important; z-index: 2147483647 !important; display: none !important; flex-direction: column !important; gap: 3px !important; min-width: 210px !important; font-family: system-ui, sans-serif !important; }
     #cc-ask-ai-panel.cc-open { display: flex !important; animation: cc-pop 0.16s cubic-bezier(0.16,1,0.3,1) !important; }
     @keyframes cc-pop { from { opacity:0; transform:translateY(6px) scale(0.97); } to { opacity:1; transform:translateY(0) scale(1); } }
     .cc-panel-hdr { font-size: 10px !important; font-weight: 700 !important; color: rgba(255,255,255,0.35) !important; text-transform: uppercase !important; letter-spacing: 0.8px !important; padding: 3px 8px 8px !important; border-bottom: 1px solid rgba(255,255,255,0.07) !important; margin-bottom: 2px !important; }
-    .cc-ai-opt { display: flex !important; align-items: center !important; gap: 10px !important; width: 100% !important; padding: 8px 10px !important; background: transparent !important; border: none !important; border-radius: 8px !important; cursor: pointer !important; font-family: system-ui, sans-serif !important; transition: background 0.12s, transform 0.1s !important; text-align: left !important; }
+    .cc-ai-opt { display: flex !important; align-items: center !important; gap: 10px !important; width: 100% !important; padding: 8px 10px !important; background: #18181b !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,0.25) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important; border: none !important; border-radius: 8px !important; cursor: pointer !important; font-family: system-ui, sans-serif !important; transition: background 0.12s, transform 0.1s !important; text-align: left !important; }
     .cc-ai-opt:hover { background: rgba(255,255,255,0.06) !important; transform: translateX(2px) !important; }
     .cc-ai-ico { width: 28px !important; height: 28px !important; border-radius: 8px !important; display: flex !important; align-items: center !important; justify-content: center !important; flex-shrink: 0 !important; }
     .cc-ai-lbl { font-size: 13px !important; font-weight: 600 !important; color: rgba(255,255,255,0.9) !important; display:block !important; }
@@ -252,7 +260,11 @@ function ensureStyles() {
     .cc-arr { margin-left: auto !important; color: rgba(255,255,255,0.35) !important; flex-shrink: 0 !important; }
     .cc-divider { height: 1px !important; background: rgba(255,255,255,0.07) !important; margin: 3px 0 !important; }
     .cc-action-row { display: flex !important; gap: 4px !important; padding: 2px !important; }
-    .cc-action-btn { flex: 1 !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; padding: 7px 10px !important; background: transparent !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 8px !important; color: rgba(255,255,255,0.55) !important; cursor: pointer !important; font-family: system-ui, sans-serif !important; font-size: 11px !important; font-weight: 500 !important; transition: background 0.12s, color 0.12s !important; white-space: nowrap !important; }
+    .cc-action-btn { flex: 1 !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 6px !important; padding: 7px 10px !important; background: #18181b !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,0.25) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 8px !important; color: rgba(255,255,255,0.55) !important; cursor: pointer !important; font-family: system-ui, sans-serif !important; font-size: 11px !important; font-weight: 500 !important; transition: background 0.12s, color 0.12s !important; white-space: nowrap !important; }
     .cc-action-btn:hover { background: rgba(255,255,255,0.07) !important; color: rgba(255,255,255,0.9) !important; }
   `;
   document.head.appendChild(s);

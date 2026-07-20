@@ -351,32 +351,37 @@ function ensureStyles() {
     #cc-ask-ai-btn {
       display: inline-flex !important;
       align-items: center !important;
-      gap: 5px !important;
-      padding: 0 10px !important;
+      justify-content: center !important;
+      gap: 6px !important;
+      padding: 5px 12px !important;
       height: 32px !important;
-      background: transparent !important;
-      border: 1px solid hsl(var(--border-300) / 0.45) !important;
-      border-radius: 8px !important;
-      color: hsl(var(--text-400)) !important;
+      background: #18181b !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,0.25) !important;
+      border-radius: 16px !important;
       cursor: pointer !important;
-      font-family: inherit !important;
+      font-family: system-ui, -apple-system, sans-serif !important;
       font-size: 12px !important;
       font-weight: 600 !important;
-      transition: background 0.15s, border-color 0.15s, color 0.15s !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important;
       flex-shrink: 0 !important;
       white-space: nowrap !important;
       outline: none !important;
-      box-shadow: none !important;
+      z-index: 2147483646 !important;
+      transition: all 0.15s ease !important;
+      margin: 0 6px !important;
     }
     #cc-ask-ai-btn:hover {
-      background: hsl(var(--bg-200)) !important;
-      border-color: hsl(var(--border-200)) !important;
-      color: hsl(var(--text-200)) !important;
+      background: #27272a !important;
+      border-color: #60a5fa !important;
+      color: #60a5fa !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5) !important;
     }
     #cc-ask-ai-btn.active {
-      background: hsl(var(--bg-200)) !important;
-      border-color: hsl(var(--border-200)) !important;
-      color: hsl(var(--text-100)) !important;
+      background: #27272a !important;
+      border-color: #3b82f6 !important;
+      color: #60a5fa !important;
     }
 
     #cc-ask-ai-panel {

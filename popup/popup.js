@@ -257,17 +257,32 @@ function renderConversations(conversations, isFiltered = false) {
 
 function renderConversationsList(conversations) {
   const list = document.getElementById("conversations-list");
-  const empty = document.getElementById("empty-state");
+  if (!list) return;
+
+  let empty = document.getElementById("empty-state");
+  if (!empty) {
+    empty = document.createElement("div");
+    empty.id = "empty-state";
+    empty.className = "empty-state";
+    empty.innerHTML = `
+      <div class="empty-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>
+        </svg>
+      </div>
+      <p class="empty-title">No conversations saved yet</p>
+      <p class="empty-body">Conversations will be automatically saved as you chat on Claude, ChatGPT, Gemini, DeepSeek, etc.</p>
+    `;
+  }
 
   list.innerHTML = "";
 
-  if (!conversations.length) {
+  if (!conversations || !conversations.length) {
     list.appendChild(empty);
     empty.style.display = "flex";
     return;
   }
-
-  empty.style.display = "none";
 
   conversations
     .slice()

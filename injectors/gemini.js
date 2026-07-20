@@ -433,7 +433,11 @@ function ensureStyles() {
     .cc-ai-opt {
       display: flex !important; align-items: center !important; gap: 10px !important;
       width: 100% !important; padding: 8px 10px !important;
-      background: transparent !important; border: none !important;
+      background: #18181b !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,0.25) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important; border: none !important;
       border-radius: 8px !important; cursor: pointer !important;
       font-family: system-ui, sans-serif !important;
       transition: background 0.12s, transform 0.1s !important; text-align: left !important;
@@ -461,7 +465,11 @@ function ensureStyles() {
       justify-content: center !important;
       gap: 6px !important;
       padding: 7px 10px !important;
-      background: transparent !important;
+      background: #18181b !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,0.25) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important;
       border: 1px solid rgba(255,255,255,0.08) !important;
       border-radius: 8px !important;
       color: rgba(255,255,255,0.55) !important;
