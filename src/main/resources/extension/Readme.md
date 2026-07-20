@@ -1,13 +1,12 @@
 # 💊 Capsule — Multi-AI Transfer Prompt & Context Bridge
 
-[![Chrome Extension](https://img.shields.io/badge/Chrome_Extension-MV3-blue.svg)](https://developer.chrome.com/docs/extensions/mv3/intro/)
-[![Core Feature](https://img.shields.io/badge/Flagship-1--Click%20Transfer%20Prompt-orange.svg)](#-core-feature-1-click-cross-ai-transfer-prompt-engine)
-[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](pom.xml)
-[![Security](https://img.shields.io/badge/Security-AES--GCM--256-success.svg)](shared/llm_client.js)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-2.0.0-purple.svg)](package.json)
+![Chrome Extension](https://img.shields.io/badge/Platform-Chrome%20Extension%20MV3-blue.svg)
+![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)
+![Security](https://img.shields.io/badge/Security-AES--GCM--256%20%7C%20PBKDF2-success.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Version](https://img.shields.io/badge/Version-2.0.0-purple.svg)
 
-> **Transfer any AI prompt and conversation context to another AI in 1 click.** Seamlessly bridge your active session state across **8 major AI platforms**: **Claude**, **ChatGPT**, **Gemini**, **DeepSeek**, **Perplexity**, **Grok**, **Mistral**, and **Kimi**, plus **NotebookLM**.
+> **Never lose your AI prompt or context again.** Transfer your active prompt thread and conversation state between **Claude**, **ChatGPT**, **Gemini**, **DeepSeek**, **Perplexity**, **Grok**, **Mistral**, and **Kimi** in a single click (+ NotebookLM integration).
 
 ```
    ██████╗ █████╗ ██████╗ ███████╗██╗   ██╗██╗     ███████╗
@@ -17,197 +16,247 @@
   ╚██████╗██║  ██║██║     ███████║╚██████╔╝███████╗███████╗
    ╚═════╝╚═╝  ╚═╝╚═╝     ╚══════╝ ╚═════╝ ╚══════╝╚══════╝
    
-             ──▶ 🚀 1-CLICK TRANSFER PROMPT ENGINE ◀──
+             ──▶ 🚀 1-CLICK CROSS-AI TRANSFER PROMPT ENGINE ◀──
 ```
 
 ---
 
 ## 📋 Table of Contents
 
-1. [The Problem](#-the-problem)
-2. [The Solution: Transfer Prompt Engine](#-the-solution-transfer-prompt-engine)
-3. [🚀 Flagship Feature: 1-Click Cross-AI Transfer Prompt](#-flagship-feature-1-click-cross-ai-transfer-prompt)
-4. [Supported AI Platforms & Capability Matrix](#-supported-ai-platforms--capability-matrix)
-5. [In-Depth Feature Breakdown](#-in-depth-feature-breakdown)
-   - [Unified Management Console (Popup UI)](#1-unified-management-console-popup-ui)
-   - [Injected Transfer Pill & Panel](#2-injected-transfer-pill--panel)
-   - [Resilient Unauthenticated & Modal Injection](#3-resilient-unauthenticated--modal-injection)
-   - [AI Context Compression Pipeline](#4-ai-context-compression-pipeline)
-   - [Security & Cryptography System](#5-security--cryptography-system)
-6. [Configuration & Storage Guide](#-configuration--storage-guide)
-7. [Architecture & Data Flow](#-architecture--data-flow)
-8. [Build & Installation Guide](#-build--installation-guide)
-9. [Testing Suite](#-testing-suite)
-10. [🚀 Next Release Plan & Roadmap (v2.1 - v3.0)](#-next-release-plan--roadmap)
-11. [License](#-license)
+1. [Why Capsule Exists (Problem Statement)](#-why-capsule-exists-problem-statement)
+2. [What Makes Capsule Different](#-what-makes-capsule-different)
+3. [Key Features](#-key-features)
+4. [Feature Walkthrough (14 Core Features)](#-feature-walkthrough-14-core-features)
+5. [Screenshots](#-screenshots)
+6. [Supported AI Platforms](#-supported-ai-platforms)
+7. [How Capsule Works (Flow Diagram)](#-how-capsule-works-flow-diagram)
+8. [Architecture](#-architecture)
+9. [Security & Privacy](#-security--privacy)
+10. [Performance](#-performance)
+11. [Permissions Explained](#-permissions-explained)
+12. [Installation](#-installation)
+13. [Build from Source](#-build-from-source)
+14. [Development Guide](#-development-guide)
+15. [Project Structure](#-project-structure)
+16. [Roadmap](#-roadmap)
+17. [FAQ](#-faq)
+18. [Contributing](#-contributing)
+19. [License](#-license)
 
 ---
 
-## 😤 The Problem
+## 😤 Why Capsule Exists (Problem Statement)
 
-You're in the middle of an intense technical prompt session with an AI model:
+You're in the middle of a deep, multi-turn technical session with an AI model:
 - Debugging a complex microservice architecture
 - Designing an entire SQL database schema together
 - Making 15 architectural trade-offs and code decisions
 - Writing 500 lines of code collaboratively
 
-Then — **BAM.** You hit an hourly message cap, experience a service outage, or want to compare how Claude vs. ChatGPT vs. DeepSeek handles your prompt.
+Then — **BAM.** You hit an hourly rate limit, experience a platform outage, or want to compare how Claude vs. ChatGPT vs. DeepSeek solves the remaining problem.
 
 **Everything is lost.** You have to manually copy-paste snippets or re-explain your entire prompt to a fresh AI model that has zero context about what you've built.
 
 ---
 
-## 💡 The Solution: Transfer Prompt Engine
+## 🌟 What Makes Capsule Different
+
+Unlike generic bookmarking or export tools, **Capsule** acts as a **dynamic multi-AI bridge**:
+- **Zero Cloud Storage / Zero Tracking:** 100% of your data stays locally inside your Chrome browser.
+- **1-Click Active Context Transfer:** Don't just save chats — transfer your active state directly into another model's prompt area.
+- **Resilient Unauthenticated Injection:** If a target AI opens in a logged-out state or behind a Cloudflare/modal gate, Capsule holds your context and auto-injects the instant you log in.
+- **Unified 8-Platform Engine:** One extension seamlessly handles Claude, ChatGPT, Gemini, DeepSeek, Perplexity, Grok, Mistral, and Kimi.
+
+---
+
+## ⚡ Key Features
+
+- 🚀 **1-Click Transfer Prompt Engine** across 8 AI platforms
+- 💡 **"Context Ready" Floating Action Banner** for unauthenticated/modal-blocked tabs
+- 🖥️ **Unified Extension Popup** with real-time fuzzy search & filters
+- 🎨 **Color-Coded Source Badges** for instant visual platform identification
+- 📋 **1-Click Plaintext Markdown Clipboard Copy**
+- 📄 **1-Click Portable JSON Download**
+- 🧠 **Optional Gemini 2.5 Flash Context Compression**
+- 🔒 **AES-GCM 256 + PBKDF2 (600,000 rounds) Security**
+
+---
+
+## 🔍 Feature Walkthrough (14 Core Features)
+
+### 1. 🚀 1-Click Cross-AI Transfer Prompt
+Click the **Capsule** pill injected inside your prompt toolbar, choose another AI, and your entire prompt thread opens and populates in the destination AI automatically.
+
+### 2. 💡 "Context Ready" Floating Rescue Bar
+If you're not logged into the destination AI or a popup blocks the page, Capsule holds your context in storage and displays a top floating bar (`Capsule Context Ready [Inject Now] [Copy]`). Log in or close the modal, and Capsule auto-injects your prompt.
+
+### 3. ⏱️ 90-Second Background Auto-Retry Polling
+When waiting on a target page to load or finish authentication, a background observer continuously monitors the DOM for up to 90 seconds. The moment the chat input mounts, Capsule fills your prompt and clears the banner.
+
+### 4. 📋 1-Click Plaintext Markdown Copy
+Copy your formatted conversation history directly to your OS clipboard with one click from the inline Capsule panel.
+
+### 5. 📄 Portable JSON Conversation Download
+Download any conversation thread as a structured `.json` capsule directly from the active web page or popup console.
+
+### 6. 🖥️ Unified History Workspace
+View, manage, and read all your saved conversations from Claude, ChatGPT, Gemini, DeepSeek, Perplexity, Grok, Mistral, and Kimi in one central popup window.
+
+### 7. 🎨 Color-Coded AI Source Badges
+Every saved conversation card features a distinct color badge (`CLAUDE`, `CHATGPT`, `GEMINI`, `DEEPSEEK`, `PERPLEXITY`, `GROK`, `MISTRAL`, `KIMI`) for visual clarity.
+
+### 8. ⚡ Real-Time Live Search
+Type any keyword, topic name, or code snippet into the popup search box to filter your saved conversation history instantly.
+
+### 9. 📖 Inline Message Inspector
+Expand any conversation card in the extension popup to view and read full message histories without leaving your active tab.
+
+### 10. 🗑️ Granular Eviction & History Cleanup
+Delete individual conversation cards with a single click (featuring smooth CSS fade animations) or wipe your entire local history using "Clear All".
+
+### 11. 🔄 Automatic Background Saving
+You never need to click "Save". Capsule automatically records your conversation in the background as you type and receive AI responses.
+
+### 12. 🧠 Gemini 2.5 Flash Context Compression
+Optionally condense multi-hour conversation threads down to core technical facts, active goals, and code blocks using the Gemini 2.5 Flash API.
+
+### 13. 📊 Pre-Flight Token Estimator
+Calculates token counts and compression percentage savings before sending context to another AI model.
+
+### 14. 🔐 AES-GCM 256 Encryption & PBKDF2 Key Security
+Encrypts user-configured API keys using PBKDF2 with **600,000 iterations** and a 16-byte per-installation crypto salt (`cc_crypto_salt`).
+
+---
+
+## 🖼️ Screenshots
+
+### Extension Popup — Unified Multi-AI History
+![Extension Popup](assets/Preview.png)
+
+### Injected Control Pill & Export Panel
+![Injected UI Panel](assets/InjectedUI.png)
+
+---
+
+## 🌐 Supported AI Platforms
+
+| AI Platform | Domain Match | Target Input Element | Transfer Support |
+| :--- | :--- | :--- | :--- |
+| **Claude** | `*.claude.ai` | `div.ProseMirror`, `div[contenteditable]` | ✅ Full 1-Click |
+| **ChatGPT** | `chatgpt.com`, `*.chatgpt.com` | `#prompt-textarea`, `textarea` | ✅ Full 1-Click |
+| **Gemini** | `gemini.google.com` | `rich-textarea .ql-editor` | ✅ Full 1-Click |
+| **DeepSeek** | `chat.deepseek.com`, `*.deepseek.com` | `#chat-input`, `textarea` | ✅ Full 1-Click |
+| **Perplexity** | `perplexity.ai`, `*.perplexity.ai` | `textarea[placeholder*="Ask" i]` | ✅ Full 1-Click |
+| **Grok** | `grok.com`, `*.grok.com`, `x.com` | `textarea`, `div[data-testid="tweetTextarea_0"]` | ✅ Full 1-Click |
+| **Mistral** | `chat.mistral.ai`, `*.mistral.ai` | `textarea[placeholder*="Ask" i]` | ✅ Full 1-Click |
+| **Kimi** | `kimi.ai`, `*.kimi.ai`, `kimi.moonshot.cn` | `div[contenteditable]`, `textarea` | ✅ Full 1-Click |
+| **NotebookLM** | `notebooklm.google.com` | Source Modal Dialog Inputs | ✅ Automated Import |
+
+---
+
+## 🔄 How Capsule Works (Flow Diagram)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
+│  Source AI Page (e.g. Gemini)                                               │
+│  1. User clicks "Capsule" pill ──▶ Selects Target AI (e.g. Claude)          │
+│  2. Scrapes conversation state & sets pending_context_inject in storage      │
+│  3. Opens target URL: https://claude.ai/new                                  │
+└───────────────────────┬──────────────────────────────────────────────────────┘
+                        │
+                        ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  Target AI Page (e.g. Claude)                                               │
+│  4. Content script initializes & checks pending_context_inject               │
 │                                                                              │
-│  Claude / ChatGPT / Gemini / DeepSeek / Perplexity / Grok / Mistral / Kimi   │
-│                                      │                                       │
-│                       🚀 1-Click "Transfer Prompt"                           │
-│                                      │                                       │
-│                                      ▼                                       │
-│  Capsule formats & injects full prompt context into target AI input box      │
-│                                                                              │
+│  ┌─────────────────────────────────┴─────────────────────────────────┐        │
+│  ▼                                                                   ▼        │
+│  [Input Ready]                                       [Input Blocked/Login]   │
+│  Auto-fills prompt box                               Shows Floating Banner    │
+│  Dispatches input events                             Polls for 90s until login│
+│  Shows "✓ Context injected!"                         Auto-fills on ready!     │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Capsule** solves prompt isolation by providing a **universal Transfer Prompt engine**. In a single click from the inline Capsule pill button, your entire prompt history, code blocks, and conversation state are captured, structured with continuity headers, and injected directly into your choice of destination AI.
-
 ---
 
-## 🚀 Flagship Feature: 1-Click Cross-AI Transfer Prompt
-
-The **Transfer Prompt** engine is Capsule's primary capability, built to eliminate prompt re-typing across models.
-
-### How Transfer Prompt Works:
-1. **Instant Prompt Capture:** Click **Capsule** → **Send context to [Target AI]** directly inside your prompt editor.
-2. **Context Formatting:** Capsule structures your active prompt thread with standardized continuity headers:
-   ```markdown
-   [Context from Gemini conversation: "Refactoring Auth Middleware"]
-   [Scraped: 7/20/2026, 11:45:00 AM]
-
-   User: How do I implement OAuth2 PKCE flow in Node.js?
-   Gemini: Here is the implementation using crypto module...
-
-   ---
-   I'm continuing this conversation. What are your thoughts?
-   ```
-3. **Automated Target Injection:** Capsule opens the destination AI tab (e.g. `claude.ai/new`, `chatgpt.com`, `chat.deepseek.com`, `grok.com`), waits for the DOM prompt element to mount, auto-fills the prompt editor, dispatches synthetic input events, and focuses the field for immediate sending.
-
----
-
-## 🌐 Supported AI Platforms & Capability Matrix
-
-Capsule injects custom UI components and extraction adapters tailored to each AI platform's specific DOM structure:
-
-| AI Platform | Supported Host Patterns | Input Target Selectors | Transfer Prompt Support | Injection Method |
-| :--- | :--- | :--- | :--- | :--- |
-| **Claude** | `*.claude.ai` | `div.ProseMirror[contenteditable="true"]`, `div[contenteditable="true"]` | ✅ Full 1-Click Transfer | `document.execCommand('insertText')` |
-| **ChatGPT** | `chatgpt.com`, `*.chatgpt.com` | `#prompt-textarea`, `textarea[tabindex="0"]`, `div.ProseMirror` | ✅ Full 1-Click Transfer | React Native Value Setter + Input Events |
-| **Gemini** | `gemini.google.com` | `rich-textarea .ql-editor`, `[role="textbox"]` | ✅ Full 1-Click Transfer | Custom Event Chain + Dispatch |
-| **DeepSeek** | `chat.deepseek.com`, `*.deepseek.com` | `#chat-input`, `textarea[placeholder*="DeepSeek"]` | ✅ Full 1-Click Transfer | Native Setter + `input`/`change` Events |
-| **Perplexity** | `perplexity.ai`, `*.perplexity.ai` | `textarea[placeholder*="Ask" i]`, `[role="textbox"]` | ✅ Full 1-Click Transfer | Synthetic React Event Dispatch |
-| **Grok** | `grok.com`, `*.grok.com`, `x.com` | `textarea`, `div[data-testid="tweetTextarea_0"]` | ✅ Full 1-Click Transfer | Multi-target Input Setter |
-| **Mistral** | `chat.mistral.ai`, `*.mistral.ai` | `textarea[placeholder*="Ask" i]`, `textarea` | ✅ Full 1-Click Transfer | Native Property Setter |
-| **Kimi** | `kimi.ai`, `*.kimi.ai`, `kimi.moonshot.cn` | `div[contenteditable="true"]`, `textarea` | ✅ Full 1-Click Transfer | `execCommand` + Native Fallback |
-| **NotebookLM** | `notebooklm.google.com`, `notebooklm.google` | Source Modal Dialog Automated Inputs | ✅ Automated Import | 5-Step Automated Modal Ingestion |
-
----
-
-## ⚡ In-Depth Feature Breakdown
-
-### 1. Unified Management Console (Popup UI)
-- **Aggregated Prompt Stream:** Consolidates saved histories from all 8 supported AI platforms into a single unified workspace.
-- **Real-Time Fuzzy Search:** Instantly query conversation titles, code snippets, user prompts, and AI responses.
-- **Visual Source Markers:** Distinct color-coded badges indicating origin (`CLAUDE`, `CHATGPT`, `GEMINI`, `DEEPSEEK`, `PERPLEXITY`, `GROK`, `MISTRAL`, `KIMI`).
-- **Granular Data Operations:**
-  - 💾 **Export Individual Capsule:** Download a single conversation as a structured portable `.json` file.
-  - 🗑️ **Animated Eviction:** Remove specific items with smooth UI transition animations.
-  - 📦 **Bulk Backup:** Export your entire conversation store in a single JSON payload.
-
-### 2. Injected Transfer Pill & Panel
-- **Adaptive Inline Controls:** Injects a native `Capsule` control pill into each platform's prompt toolbar.
-- **Direct Transfer Dispatch:** Select a target platform from the inline popover panel; Capsule opens a new tab, waits for DOM readiness, and auto-injects the prompt context.
-- **Instant Plaintext Copy:** One-click copy of formatted markdown conversation context directly to the OS clipboard.
-
-### 3. Resilient Unauthenticated & Modal Injection
-If a target AI platform opens in a logged-out state, triggers a Cloudflare challenge, or presents a modal popup overlay:
-- **Persistent Storage Hold:** The context payload is preserved in `chrome.storage.local` under `pending_context_inject` (5-minute TTL).
-- **Floating Action Banner:** Displays a non-intrusive floating control bar at top of the window:
-  `💡 Capsule Context Ready ["Title..."] [Inject Now] [Copy] [✕]`
-- **Background Auto-Retry Loop:** An asynchronous polling loop monitors the page for up to 90 seconds. Once you log in or dismiss the modal, Capsule **automatically auto-fills** the prompt box and clears the banner.
-
-### 4. Smart Context Compression Engine
-- **Gemini 2.5 Flash Integration:** Optional AI-powered compression distills long multi-hour prompt discussions down to essential code blocks, technical decisions, and active goals.
-- **Pre-flight Token Estimation:** Built-in token counter calculates token savings prior to transfer.
-
-### 5. Enterprise-Grade Security & Encryption
-- **AES-GCM 256 Bit Encryption:** User-provided API keys are encrypted before being written to persistent extension storage.
-- **Key Derivation via PBKDF2:** Master key derived using **600,000 iterations** of PBKDF2 combined with a cryptographically secure 16-byte installation-unique salt (`cc_crypto_salt`).
-- **Strict Error Boundaries:** Fails securely without fallback to unencrypted plaintext storage.
-
----
-
-## ⚙️ Configuration & Storage Guide
-
-### Extension Options Configuration
-Access extension settings by navigating to `chrome-extension://<EXTENSION_ID>/options/options.html` or right-clicking the extension icon → **Options**.
-
-Configurable parameters:
-- **Gemini API Key:** Encrypted API key for context compression.
-- **Storage Limits:** Adjust local conversation retention caps (Default: 50 items).
-- **Export Preferences:** Choose default export mode (Markdown vs Portable JSON).
-
----
-
-## 🏗️ Architecture & Module Structure
+## 🏗️ Architecture
 
 ```
-┌───────────────────────────────────────────────────────────────────────────┐
-│                           Capsule Extension (MV3)                         │
-│                                                                           │
-│   ┌───────────────────┐    ┌───────────────────┐    ┌─────────────────┐   │
-│   │   Content Scripts │    │  Service Worker   │    │    Popup UI     │   │
-│   │                   │    │  (background.js)  │    │                 │   │
-│   │ • content.js      │───▶│                   │◀───│ • popup.html    │   │
-│   │   (Claude)        │    │ • Storage Router  │    │ • popup.js      │   │
-│   │                   │    │ • API Key Cipher  │    │ • popup.css     │   │
-│   │ • injectors/      │    │ • LLM Compressor  │    └─────────────────┘   │
-│   │   ├ chatgpt.js    │    └─────────┬─────────┘                         │
-│   │   ├ gemini.js     │              │                                   │
-│   │   ├ deepseek.js   │              ▼                                   │
-│   │   ├ perplexity.js │    ┌───────────────────┐                         │
-│   │   ├ grok.js       │    │   Storage Engine  │                         │
-│   │   ├ mistral.js    │    │                   │                         │
-│   │   └ kimi.js       │    │ chrome.storage.   │                         │
-│   └───────────────────┘    │       local       │                         │
-│                            └───────────────────┘                         │
-└───────────────────────────────────────────────────────────────────────────┘
+Capsule Extension (Manifest V3)
+├── background.js           # Service Worker: storage router, encryption & compression
+├── content.js              # Claude Content Script & DOM Observer
+├── injectors/
+│   ├── chatgpt.js          # ChatGPT Injector & Scraper
+│   ├── gemini.js           # Gemini Injector & Scraper
+│   ├── deepseek.js         # DeepSeek Injector & Scraper
+│   ├── perplexity.js       # Perplexity Injector & Scraper
+│   ├── grok.js             # Grok Injector & Scraper
+│   ├── mistral.js          # Mistral Injector & Scraper
+│   ├── kimi.js             # Kimi Injector & Scraper
+│   └── notebooklm.js       # NotebookLM Automation Pipeline
+├── shared/
+│   ├── api_hook.js         # MAIN world network proxy interceptor
+│   ├── llm_client.js       # Encrypted Gemini API client
+│   ├── nlp_compress.js     # Context compression engine
+│   └── token_estimator.js  # Pre-flight token estimator
+└── popup/ & options/       # Extension UI interfaces
 ```
 
 ---
 
-## 📦 Build & Installation Guide
+## 🔒 Security & Privacy
 
-### Building Unpacked Extension from Source
+- **100% Local Storage:** All scraped conversation data remains exclusively inside your browser's local `chrome.storage.local`.
+- **AES-GCM 256 Encryption:** API keys are encrypted using AES-GCM 256 with PBKDF2 (600,000 iterations) and an installation-unique 16-byte salt (`cc_crypto_salt`).
+- **No Third-Party Analytics:** Capsule makes zero network calls to analytics, tracking, or telemetry servers.
+
+---
+
+## ⚡ Performance
+
+- **Debounced DOM Observers:** MutationObservers wait for a 1.5s pause in streaming before capturing DOM updates to prevent CPU overhead.
+- **Zero Background Memory Leaks:** Service worker automatically terminates when idle in compliance with Manifest V3 standards.
+
+---
+
+## 🔑 Permissions Explained
+
+| Permission | Purpose |
+| :--- | :--- |
+| `storage` | Saves conversation histories and encrypted settings locally in Chrome. |
+| `activeTab` | Accesses the active AI tab when you open the popup console. |
+| `scripting` | Programmatically manages content scripts across supported tabs. |
+| Host Permissions (`*://*.claude.ai/*`, `https://chatgpt.com/*`, etc.) | Injects the Capsule pill and handles prompt auto-filling on supported AI sites. |
+
+---
+
+## 📦 Installation
+
+1. Clone or download this repository.
+2. Open Google Chrome and navigate to `chrome://extensions`.
+3. Enable **Developer mode** (top right toggle).
+4. Click **Load unpacked** and select the `target/capsule-extension` (or `src/main/resources/extension`) directory.
+
+---
+
+## 🛠️ Build from Source
+
 Prerequisites: **Java 17+**, **Apache Maven 3.8+**, **Node.js 18+**
 
 ```bash
-# Clone repository
+# Clone the repository
 git clone https://github.com/getnimishk/Capsule.git
 cd Capsule
 
-# Run Maven Release Build
+# Build production ZIP archive
 mvn clean package -P release
 ```
-The compiled distribution package is output to: `target/capsule-2.0.0.zip`.
+The compiled package will be generated at `target/capsule-2.0.0.zip`.
 
 ---
 
-## 🧪 Testing Suite
-
-Run unit tests via **Jest**:
+## 💻 Development Guide
 
 ```bash
 # Install dependencies
@@ -217,21 +266,66 @@ npm install
 npm test
 ```
 
+When editing content scripts or injectors, run the sync step before building Maven packages:
+```powershell
+Copy-Item "injectors/*" "src/main/resources/extension/injectors/" -Recurse -Force
+Copy-Item "content.js" "src/main/resources/extension/" -Force
+Copy-Item "manifest.json" "src/main/resources/extension/" -Force
+```
+
 ---
 
-## 🚀 Future Roadmap & Development Plan
+## 📁 Project Structure
 
-### **v2.1 — Storage Scalability & Local Model Ecosystem (Q3 2026)**
-- **IndexedDB Storage Engine:** Transition from `chrome.storage.local` to IndexedDB to allow unlimited conversation storage with code snippet indexing.
-- **Local AI Support:** Dedicated injection adapters for **Ollama**, **LM Studio**, and **Open WebUI**.
+```
+Capsule/
+├── manifest.json                  # Manifest V3 Configuration
+├── background.js                  # Background Service Worker
+├── content.js                     # Claude Content Script
+├── pom.xml                        # Maven Build Spec
+├── package.json                   # Dependencies & Test Config
+├── Readme.md                      # Documentation
+├── LICENSE                        # MIT License
+├── popup/                         # Popup UI (HTML, CSS, JS)
+├── options/                       # Options UI (HTML, CSS, JS)
+├── injectors/                     # Platform Injectors (ChatGPT, Gemini, DeepSeek, etc.)
+├── shared/                        # Encryption, Compression & Interceptors
+├── icons/                         # HiDPI PNG Icons (16, 32, 48, 128px)
+└── tests/                         # Jest Test Suites
+```
 
-### **v2.2 — WASM Semantic Search & Context Diffing (Q3 2026)**
-- **Local Vector Search (RAG):** In-browser vector embeddings generated via WASM for semantic search across past conversations.
-- **Visual Context Diffs:** Highlight what information was added or modified during Transfer Prompt operations.
+---
 
-### **v3.0 — Encrypted Multi-Device Sync (Q4 2026)**
-- **Peer-to-Peer WebRTC Sync:** End-to-end encrypted device synchronization without central server storage.
-- **Cross-Browser Ports:** Native Manifest V3 releases for Firefox and Safari.
+## 🚀 Roadmap
+
+- [x] **v2.0:** Multi-AI 8-Platform Support, Resilient Unauthenticated Floating Banner, PBKDF2 + AES-GCM 256 Security.
+- [ ] **v2.1:** IndexedDB Migration (unlimited history), Local LLM Support (Ollama, LM Studio, Open WebUI).
+- [ ] **v2.2:** WASM Local Vector RAG Search & Visual Context Diffs.
+- [ ] **v3.0:** WebRTC Encrypted Peer-to-Peer Multi-Device Sync & Firefox/Safari Ports.
+
+---
+
+## ❓ FAQ
+
+#### **Q: Is my conversation data uploaded to any server?**
+**No.** 100% of your conversation history stays strictly on your local computer inside Chrome's `chrome.storage.local`.
+
+#### **Q: What happens if I am not logged into the destination AI?**
+Capsule holds your prompt context safely in storage and displays a floating top bar: `Capsule Context Ready [Inject Now] [Copy]`. Once you log in, Capsule auto-injects your prompt automatically!
+
+#### **Q: How do I export my data?**
+Click the Capsule icon in your Chrome toolbar → click **Export All JSON** (or click **Download** on any individual conversation card).
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+1. Fork the Repository.
+2. Create a Feature Branch (`git checkout -b feature/NewAIPlatform`).
+3. Commit your changes (`git commit -m 'Add New AI Platform'`).
+4. Push to the Branch (`git push origin feature/NewAIPlatform`).
+5. Open a Pull Request.
 
 ---
 
